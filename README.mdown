@@ -4,23 +4,27 @@ GoogleReaderAPI
 A Google Reader api. Programmed in ruby. This is an unofficial api.
 Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
 
+Convenience updates are being added in this fork.
+Do NOT assume that master is stable. It probably is, but just sayin'.
+Also, the upstream gem assumes ruby 1.9 in a call or two, as does this fork.
+
 Usage
 -----
 
 If you would like to implement your own methods, you can quite easily use
 the api class provided.
-    
+
     api = GoogleReaderApi::Api.new email, pass
 
 and then you can perform requests using the `get_link` and `post_link` methods.
 
     # this will give the user info.
     api.get_link "api/0/user-info"
-    
-    # this will add a feed 
+
+    # this will add a feed
     api.post_link 'api/0/subscription/edit', :s => "feed/#{url}" , :ac => :subscribe
 
-The following methods all use the `Api` class, so there is no magic 
+The following methods all use the `Api` class, so there is no magic
 involved.
 
     # password should be asked by the app using the api
@@ -41,12 +45,12 @@ then you can get the unread items, the read items, ...
     hn.read_items
     # all the starred items
     hn.starred_items
-    
+
 you get the idea.
 you can like items, star items, and mark them as read or unread.
 
     hn.all_unread_items.each {|item| item.toggle_read}
-    
+
 subscribing to new feeds is also easy
 
     user.subscriptions.add "any feed url here"
@@ -54,7 +58,7 @@ subscribing to new feeds is also easy
 unsubscribing is best done via `remove_if` method
 
     user.subscriptions.remove_if {|feed| feed.title =~ /hacker news/i}
-    
+
 Todo
 ----
 

@@ -6,9 +6,17 @@ module GoogleReaderApi
 
     def initialize(hash,api)
       # strip the first 5 characters of the url (they are 'feed/')
-      @id = hash['id']
-      @sortid = hash['sortid']
+      @id = hash.id
+      @label = hash.label
       @api = api
+    end
+
+    def id
+      @id
+    end
+
+    def label
+      @label
     end
 
     def items(count=20)
@@ -20,7 +28,7 @@ module GoogleReaderApi
     end
 
     def to_s
-      "<<Tag: #{@id}>>"
+      "<<Tag: #{@label}>>"
     end
   end
 end

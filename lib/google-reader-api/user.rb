@@ -22,12 +22,8 @@ module GoogleReaderApi
       subscriptions.feeds
     end
 
-    def tag_list
-      @tag_list ||= GoogleReaderApi::TagList.new @api
-    end
-
-    def tags
-      tag_list.tags
+    def categories
+      @categories ||= subscriptions.categories
     end
 
   end

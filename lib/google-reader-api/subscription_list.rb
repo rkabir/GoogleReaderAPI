@@ -54,8 +54,16 @@ module GoogleReaderApi
       @feeds
     end
 
+    def categories
+      @categories
+    end
+
     def each
       @feeds.each {|feed| yield feed}
+    end
+
+    def json
+      @json
     end
 
     def update
@@ -65,8 +73,12 @@ module GoogleReaderApi
     private
 
     def fetch_list
-      json = JSON[@api.get_link 'api/0/subscription/list', :output => :json]['subscriptions']
-      @feeds = json.map {|hash| GoogleReaderApi::Feed.new(hash,@api) }
+      @json = Hashie::Mash.new(
+        JSON[@api.get_link 'api/0/subscription/list', :output => :json]
+      )
+      subscriptions = @json.subscriptions
+      @feeds = subscriptions.map {|hash| GoogleReaderApi::Feed.new(hash,@api) }
+      @categories = GoogleReaderApi::TagHash.new(subscriptions, @api)
     end
 
   end

@@ -26,5 +26,9 @@ module GoogleReaderApi
       @categories ||= subscriptions.categories
     end
 
+    def unread
+      subscriptions.unread_items
+    end
+
   end
 end

@@ -45,6 +45,11 @@ module GoogleReaderApi
       @hash.keys.select{|x| x.class!=String}
     end
 
+    def tag_by_name(name)
+      re = Regexp.new(name, true)
+      tags.select{|x| x.label=~re}
+    end
+
     def each
       tags.each {|tag| yield tag}
     end

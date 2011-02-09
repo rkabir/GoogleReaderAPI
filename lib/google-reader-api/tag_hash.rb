@@ -47,7 +47,7 @@ module GoogleReaderApi
 
     def tag_by_name(name)
       re = Regexp.new(name, true)
-      tags.select{|x| x.label=~re}
+      tags.find{|x| x.label=~re}
     end
 
     def each

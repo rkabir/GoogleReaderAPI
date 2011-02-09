@@ -5,7 +5,6 @@ module GoogleReaderApi
     include GoogleReaderApi::RssUtils
 
     def initialize(hash,api)
-      # strip the first 5 characters of the url (they are 'feed/')
       @id = hash.id
       @label = hash.label
       @api = api

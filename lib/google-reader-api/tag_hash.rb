@@ -30,7 +30,6 @@ module GoogleReaderApi
     def get_key(category_hash)
       key = @keys.find{|x| x.id == category_hash.id}
       if key.nil?
-        puts "no key"
         key = GoogleReaderApi::Tag.new(category_hash, @api)
         @keys << key
       end

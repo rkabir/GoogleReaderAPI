@@ -23,6 +23,10 @@ module GoogleReaderApi
       create_entries @api.get_link "atom/#{@id}"
     end
 
+    def unread_items(count=20)
+      create_entries get_feed_items(:n => count,:xt => 'user/-/state/com.google/read')
+    end
+
     def inspect
       to_s
     end
@@ -30,5 +34,10 @@ module GoogleReaderApi
     def to_s
       "<<Tag: #{@label}>>"
     end
+
+    def get_feed_items(args={})
+      @api.get_link "atom/#{@id}" , args
+    end
+
   end
 end

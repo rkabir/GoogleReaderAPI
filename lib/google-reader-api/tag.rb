@@ -20,7 +20,7 @@ module GoogleReaderApi
     end
 
     def items(count=20)
-      create_entries @api.get_link "atom/#{@id}"
+      create_entries get_feed_items(:n => count)
     end
 
     def unread_items(count=20)

@@ -33,10 +33,6 @@ module GoogleReaderApi
       create_entries get_user_items('read',:n => count)
     end
 
-    def starred_items(count=20)
-      create_entries get_user_items('starred',:n => count)
-    end
-
     # return the number of specified items. (read or not)
     def items(count = 20)
       create_entries get_feed_items(:n => count)

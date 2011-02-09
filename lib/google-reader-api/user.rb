@@ -6,6 +6,8 @@ module GoogleReaderApi
     # maybe someone would like to access the api for a user
     attr_reader :api
 
+    include GoogleReaderApi::RssUtils
+
     def initialize(email,password)
       @api = GoogleReaderApi::Api::new email,password
     end
@@ -28,6 +30,16 @@ module GoogleReaderApi
 
     def unread
       subscriptions.unread_items
+    end
+
+    def starred_items(count=20)
+      create_entries get_user_items('starred',:n => count)
+    end
+
+    private
+
+    def get_user_items(state,args={})
+      @api.get_link "atom/user/-/state/com.google/#{state}" , args
     end
 
   end

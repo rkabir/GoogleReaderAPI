@@ -19,15 +19,28 @@ module GoogleReaderApi
     end
 
     def items(count=20)
+      @items ||= get_items
+    end
+
+    def get_items
       create_entries get_feed_items(:n => count)
     end
 
     def unread_items(count=20)
+      @unread_items ||= get_unread_items
+    end
+
+    def get_unread_items
       create_entries get_feed_items(:n => count,:xt => 'user/-/state/com.google/read')
     end
 
     def inspect
       to_s
+    end
+
+    def refresh
+      @items = create_entries get_feed_items(:n => count)
+      @unread_items = create_entries get_feed_items(:n => count,:xt => 'user/-/state/com.google/read')
     end
 
     def to_s

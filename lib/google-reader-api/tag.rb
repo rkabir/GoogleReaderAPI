@@ -22,7 +22,7 @@ module GoogleReaderApi
       @items ||= get_items
     end
 
-    def get_items
+    def get_items(count=20)
       create_entries get_feed_items(:n => count)
     end
 
@@ -30,7 +30,7 @@ module GoogleReaderApi
       @unread_items ||= get_unread_items
     end
 
-    def get_unread_items
+    def get_unread_items(count=20)
       create_entries get_feed_items(:n => count,:xt => 'user/-/state/com.google/read')
     end
 

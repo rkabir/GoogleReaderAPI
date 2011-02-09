@@ -42,7 +42,7 @@ module GoogleReaderApi
     end
 
     def tags
-      @hash.keys
+      @hash.keys.select{|x| x.class!=String}
     end
 
     def each

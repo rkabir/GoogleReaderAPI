@@ -41,8 +41,12 @@ module GoogleReaderApi
       @hash
     end
 
+    def tags
+      @hash.keys
+    end
+
     def each
-      @tags.each {|tag| yield tag}
+      tags.each {|tag| yield tag}
     end
 
   end

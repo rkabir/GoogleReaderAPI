@@ -7,7 +7,7 @@ module GoogleReaderApi
       @api, @entry = api, entry
     end
 
-    def toggle_read
+    def mark_read
       edit_tag 'user/-/state/com.google/read'
     end
 
@@ -26,10 +26,11 @@ module GoogleReaderApi
     private
 
     def edit_tag(tag_identifier)
-      @api.post_link "api/0/edit-tag" , :a => tag_identifier ,
-                                        :s => entry.parent.id.content.to_s.scan(/feed\/.*/) ,
-                                        :i => entry.id.content.to_s
+      token = @api.get_link "api/0/token"
+      @api.post_link "api/0/edit-tag" , :a => tag_identifier,
+                                        :i => entry.id.content,
+                                        :T => token,
+                                        :ac => "edit"
     end
-
   end
 end

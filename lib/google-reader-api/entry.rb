@@ -25,11 +25,14 @@ module GoogleReaderApi
 
     private
 
+    def get_token
+      @token ||= @api.get_link "api/0/token"
+    end
+
     def edit_tag(tag_identifier)
-      token = @api.get_link "api/0/token"
       @api.post_link "api/0/edit-tag" , :a => tag_identifier,
                                         :i => entry.id.content,
-                                        :T => token,
+                                        :T => get_token,
                                         :ac => "edit"
     end
   end

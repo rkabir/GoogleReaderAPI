@@ -48,7 +48,7 @@ module GoogleReaderApi
     end
 
     def get_feed_items(args={})
-      @api.get_link "atom/#{@id}" , args
+      @api.get_link "atom/#{URI.escape(@id)}" , args
     end
 
   end

@@ -8,14 +8,24 @@ module GoogleReaderApi
       @id = hash.id
       @label = hash.label
       @api = api
+      @feeds = []
     end
 
     def id
       @id
     end
 
+    def feeds
+      @feeds
+    end
+
     def label
       @label
+    end
+
+    def add_feed(feed)
+      @feeds << feed
+      @feeds.uniq!
     end
 
     def items(count=20)

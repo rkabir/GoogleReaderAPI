@@ -21,6 +21,7 @@ module GoogleReaderApi
         else
           sub_hash.categories.each do |category_hash|
             key = get_key(category_hash)
+            key.add_feed(feed)
             @hash[key] += [feed]
           end
         end

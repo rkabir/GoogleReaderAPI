@@ -19,6 +19,10 @@ module GoogleReaderApi
       @feeds
     end
 
+    def sorted_feeds
+      feeds.sort{|a,b| a.unread_count <=> b.unread_count}.reverse
+    end
+
     def label
       @label
     end

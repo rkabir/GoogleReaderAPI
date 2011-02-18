@@ -36,6 +36,7 @@ module GoogleReaderApi
       get_state 'kept-unread', count
     end
 
+    # didn't return anything in my testing
     def fresh_items(count=20)
       get_state 'fresh', count
     end
@@ -48,6 +49,7 @@ module GoogleReaderApi
       get_state 'broadcast', count
     end
 
+    # didn't return anything in my testing.
     def reading_list(count=20)
       get_state 'reading_list', count
     end

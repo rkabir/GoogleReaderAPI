@@ -33,41 +33,41 @@ module GoogleReaderApi
     end
 
     def kept_unread(count=20)
-      get_state 'kept-unread', count
+      @kept_unread ||= get_state 'kept-unread', count
     end
 
     # didn't return anything in my testing
     def fresh_items(count=20)
-      get_state 'fresh', count
+      @fresh ||= get_state 'fresh', count
     end
 
     def starred_items(count=20)
-      get_state 'starred', count
+      @starred ||= get_state 'starred', count
     end
 
     def broadcasted(count=20)
-      get_state 'broadcast', count
+      @broadcasted ||= get_state 'broadcast', count
     end
 
     # didn't return anything in my testing.
     def reading_list(count=20)
-      get_state 'reading_list', count
+      @reading_list ||= get_state 'reading_list', count
     end
 
     def clicked_body(count=20)
-      get_state 'tracking-body-link-used', count
+      @clicked_body ||= get_state 'tracking-body-link-used', count
     end
 
     def emailed(count=20)
-      get_state 'tracking-emailed', count
+      @emailed ||= get_state 'tracking-emailed', count
     end
 
     def clicked_item(count=20)
-      get_state 'tracking-item-link-used', count
+      @clicked_item ||= get_state 'tracking-item-link-used', count
     end
 
     def tracking_kept_unread(count=20)
-      get_state 'kept-unread', count
+      @tracking_kept_unread ||= get_state 'kept-unread', count
     end
 
     def get_state(state, count=20)

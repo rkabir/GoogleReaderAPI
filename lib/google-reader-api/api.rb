@@ -47,8 +47,7 @@ module GoogleReaderApi
     end
 
     def oauth_get_request(link, args)
-      string_args = args.inject({}){|args,(k,v)| args[k] = v.to_s; args}
-      @oauth.get(link, string_args).body
+      @oauth.get("#{link}?#{argument_string(args)}").body
     end
 
     def oauth_post_request(link, args={}, headers ={})

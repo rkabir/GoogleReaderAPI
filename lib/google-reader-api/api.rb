@@ -8,13 +8,12 @@ module GoogleReaderApi
 
     BASE_URL = "http://www.google.com/reader/"
 
-    def initialize(email,password)
-      request_auth(email,password)
-      @cache = GoogleReaderApi::Cache.new(2)
-    end
-
-    def init_with_oauth(oauth)
-      @oauth = oauth
+    def initialize(email ="", password="", oauth=nil)
+      if !email.empty? && !password.empty?
+        request_auth(email,password)
+      else
+        @oauth = oauth
+      end
       @cache = GoogleReaderApi::Cache.new(2)
     end
 

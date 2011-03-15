@@ -8,8 +8,8 @@ module GoogleReaderApi
 
     include GoogleReaderApi::RssUtils
 
-    def initialize(email,password)
-      @api = GoogleReaderApi::Api::new email,password
+    def initialize(email="", password="", oauth=nil)
+      @api = GoogleReaderApi::Api::new email,password, oauth
     end
 
     def info

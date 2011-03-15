@@ -13,21 +13,48 @@ module GoogleReaderApi
       @cache = GoogleReaderApi::Cache.new(2)
     end
 
+    def init_with_oauth(oauth)
+      @oauth = oauth
+      @cache = GoogleReaderApi::Cache.new(2)
+    end
+
+    def token
+      @token ||= get_link "api/0/token"
+    end
+
     # do a get request to the link
     # args is a hash of values that should be used in the request
     def get_link(link,args={})
       link = BASE_URL + link
-      get_request(link,args)
+      if @oauth
+        oauth_get_request(link, args)
+      else
+        get_request(link,args)
+      end
     end
 
     def post_link(link,args={})
       link = BASE_URL + link
-      post_request(link,args)
+      args.merge!(:T => token)
+      if @oauth
+        oauth_post_request(link, args)
+      else
+        post_request(link,args)
+      end
     end
 
     def cached_unread_count
       @cache['unread-count'] ||= get_link 'api/0/unread-count', :output => :json
     end
+
+    def oauth_get_request(link, args)
+      @oauth.get(link, args).body
+    end
+
+    def oauth_post_request(link, args={}, headers ={})
+      @oauth.post(link, args, headers).body
+    end
+
 
     private
 

@@ -65,5 +65,9 @@ module GoogleReaderApi
       @api.get_link "atom/#{URI.escape(@id)}" , args
     end
 
+    def <=>(other)
+      self.label.downcase <=> other.label.downcase
+    end
+
   end
 end

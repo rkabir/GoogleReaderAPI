@@ -8,6 +8,10 @@ module GoogleReaderApi
 
     include GoogleReaderApi::RssUtils
 
+    # intialize takes email, passwd still for backwards compatability
+    # the third param, oauth, can take an OAuth::AccessToken
+    # if an AccessToken is used to create the API, AccessToken calls will be
+    # used to access Google Reader
     def initialize(email="", password="", oauth=nil)
       @api = GoogleReaderApi::Api::new email,password, oauth
     end

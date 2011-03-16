@@ -8,6 +8,10 @@ module GoogleReaderApi
 
     BASE_URL = "https://www.google.com/reader/"
 
+    # intialize takes email, passwd still for backwards compatability
+    # the third param, oauth, can take an OAuth::AccessToken
+    # if an AccessToken is used to create the API, AccessToken calls will be
+    # used to access Google Reader
     def initialize(email ="", password="", oauth=nil)
       if !email.empty? && !password.empty?
         request_auth(email,password)
@@ -48,8 +52,6 @@ module GoogleReaderApi
 
     def oauth_get_request(link, args={})
       args[:ck] = Time.now.to_i unless args[:ck]
-      puts link
-      puts args
       @oauth.get("#{link}?#{argument_string(args)}").body
     end
 
@@ -76,8 +78,6 @@ module GoogleReaderApi
 
       # ck is the current unix timestamp
       args[:ck] = Time.now.to_i unless args[:ck]
-      puts url
-      puts args
       req = Net::HTTP::Get.new("#{uri.path}?#{argument_string(args)}")
       request(uri,req)
     end

@@ -12,6 +12,14 @@ module GoogleReaderApi
       @api = GoogleReaderApi::Api::new email,password, oauth
     end
 
+    def self.from_oauth(oauth)
+      self.new("", "", oauth)
+    end
+
+    def self.with_email_and_pass(email, pass)
+      self.new(email, pass)
+    end
+
     def info
       JSON[api.get_link "api/0/user-info"]
     end

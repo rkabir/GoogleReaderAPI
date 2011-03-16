@@ -46,7 +46,8 @@ module GoogleReaderApi
       @cache['unread-count'] ||= get_link 'api/0/unread-count', :output => :json
     end
 
-    def oauth_get_request(link, args)
+    def oauth_get_request(link, args={})
+      args[:ck] = Time.now.to_i unless args[:ck]
       @oauth.get("#{link}?#{argument_string(args)}").body
     end
 

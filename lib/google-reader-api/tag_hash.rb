@@ -45,6 +45,16 @@ module GoogleReaderApi
       @hash.keys.select{|x| x.class!=String}
     end
 
+    def unread_tags
+      mappings = tags.map do |t|
+        Hashie::Mash.new(
+          {:tag => t,
+           :unread_count => t.feeds.map{|f| f.unread_count}.sum}
+        )
+      end
+      mappings.sort{|a,b| a.unread_count<=>b.unread_count}.reverse
+    end
+
     def tag_by_name(name)
       re = Regexp.new(name, true)
       tags.find{|x| x.label=~re}

@@ -6,7 +6,7 @@ module GoogleReaderApi
     require "net/https"
     require "uri"
 
-    BASE_URL = "http://www.google.com/reader/"
+    BASE_URL = "https://www.google.com/reader/"
 
     def initialize(email ="", password="", oauth=nil)
       if !email.empty? && !password.empty?
@@ -48,6 +48,8 @@ module GoogleReaderApi
 
     def oauth_get_request(link, args={})
       args[:ck] = Time.now.to_i unless args[:ck]
+      puts link
+      puts args
       @oauth.get("#{link}?#{argument_string(args)}").body
     end
 
@@ -55,7 +57,6 @@ module GoogleReaderApi
       string_args = args.inject({}){|args,(k,v)| args[k] = v.to_s; args}
       @oauth.post(link, string_args, headers).body
     end
-
 
     private
 
@@ -75,7 +76,8 @@ module GoogleReaderApi
 
       # ck is the current unix timestamp
       args[:ck] = Time.now.to_i unless args[:ck]
-
+      puts url
+      puts args
       req = Net::HTTP::Get.new("#{uri.path}?#{argument_string(args)}")
       request(uri,req)
     end

@@ -48,6 +48,9 @@ module GoogleReaderApi
       subscriptions.unread_items
     end
 
+    # max count in the following is likely to be 1000
+    # it was 1000 for starred
+
     def kept_unread(count=20)
       @kept_unread ||= get_state 'kept-unread', count
     end

@@ -86,7 +86,7 @@ module GoogleReaderApi
     end
 
     def tracking_kept_unread(count=20)
-      @tracking_kept_unread ||= get_state 'kept-unread', count
+      @tracking_kept_unread ||= get_state 'tracking-kept-unread', count
     end
 
     def get_state(state, count=20)

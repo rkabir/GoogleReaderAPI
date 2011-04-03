@@ -27,6 +27,11 @@ module GoogleReaderApi
       @entry.link.href
     end
 
+    # CAUTION: experimental!
+    def feed_url
+      @entry.source.id.content.split("feed/").last
+    end
+
     private
 
     def get_token

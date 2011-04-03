@@ -23,6 +23,10 @@ module GoogleReaderApi
       "<<Entry: #{@entry.title.content} >>"
     end
 
+    def url
+      @entry.link.href
+    end
+
     private
 
     def get_token

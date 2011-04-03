@@ -51,34 +51,24 @@ module GoogleReaderApi
     # max count in the following is likely to be 1000
     # it was 1000 for starred
 
-    def kept_unread(count=20)
-      @kept_unread ||= get_state 'kept-unread', count
-    end
-
-    # didn't return anything in my testing
-    def fresh_items(count=20)
-      @fresh ||= get_state 'fresh', count
-    end
-
     def starred_items(count=20)
       @starred ||= get_state 'starred', count
+    end
+
+    def kept_unread(count=20)
+      @kept_unread ||= get_state 'kept-unread', count
     end
 
     def broadcasted(count=20)
       @broadcasted ||= get_state 'broadcast', count
     end
 
-    # didn't return anything in my testing.
-    def reading_list(count=20)
-      @reading_list ||= get_state 'reading_list', count
+    def emailed(count=20)
+      @emailed ||= get_state 'tracking-emailed', count
     end
 
     def clicked_body(count=20)
       @clicked_body ||= get_state 'tracking-body-link-used', count
-    end
-
-    def emailed(count=20)
-      @emailed ||= get_state 'tracking-emailed', count
     end
 
     def clicked_item(count=20)
@@ -87,6 +77,16 @@ module GoogleReaderApi
 
     def tracking_kept_unread(count=20)
       @tracking_kept_unread ||= get_state 'tracking-kept-unread', count
+    end
+
+    # didn't return anything in my testing
+    def fresh_items(count=20)
+      @fresh ||= get_state 'fresh', count
+    end
+
+    # didn't return anything in my testing.
+    def reading_list(count=20)
+      @reading_list ||= get_state 'reading_list', count
     end
 
     def get_state(state, count=20)

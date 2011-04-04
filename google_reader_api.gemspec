@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{google_reader_api}
-  s.version = "0.3.28"
+  s.version = "0.3.29"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Toon Willems"]
-  s.date = %q{2011-04-03}
+  s.date = %q{2011-04-04}
   s.description = %q{a google reader api (unofficial) written in ruby}
   s.email = %q{willemstoon@gmail.com}
   s.extra_rdoc_files = [

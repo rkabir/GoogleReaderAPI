@@ -29,7 +29,9 @@ module GoogleReaderApi
 
     # CAUTION: experimental!
     def feed_url
-      "http" + @entry.source.id.content.split("http").last
+      if !@entry.source.id.content.include?("source")
+        "http" + @entry.source.id.content.split("http").last
+      end
     end
 
     private

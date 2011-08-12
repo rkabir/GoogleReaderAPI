@@ -55,7 +55,6 @@ module GoogleReaderApi
     def oauth_get_request(link, args={})
       args[:ck] = Time.now.to_i unless args[:ck]
       result = @oauth.get("#{link}?#{argument_string(args)}")
-      puts result.class
       raise UnauthorizedError if result.is_a?(Net::HTTPUnauthorized)
       result.body
     end

@@ -1,4 +1,6 @@
 module GoogleReaderApi
+  class ApiError < StandardError; end
+  class UnauthorizedError < ApiError; end
 
   class Api
 
@@ -52,12 +54,16 @@ module GoogleReaderApi
 
     def oauth_get_request(link, args={})
       args[:ck] = Time.now.to_i unless args[:ck]
-      @oauth.get("#{link}?#{argument_string(args)}").body
+      result = @oauth.get("#{link}?#{argument_string(args)}")
+      raise UnauthorizedError if result.is_a?(Net::HTTPUnauthorized)
+      result.body
     end
 
     def oauth_post_request(link, args={}, headers ={})
       string_args = args.inject({}){|args,(k,v)| args[k] = v.to_s; args}
-      @oauth.post(link, string_args, headers).body
+      result = @oauth.post(link, string_args, headers)
+      raise UnauthorizedError if result.is_a?(Net::HTTPUnauthorized)
+      result.body
     end
 
     private

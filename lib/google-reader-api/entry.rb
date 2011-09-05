@@ -34,6 +34,10 @@ module GoogleReaderApi
       end
     end
 
+    def source_link
+      @entry.source.link.href
+    end
+
     private
 
     def get_token
